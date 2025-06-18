@@ -1,0 +1,239 @@
+// Variables
+$primary-color: #2c3e50;
+$accent-color: #e67e22;
+$text-color: #34495e;
+$background-light: #f9f9f9;
+$white: #fff;
+$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin card-style {
+  background: $white;
+  border-radius: 8px;
+  box-shadow: $box-shadow;
+  padding: 2rem;
+}
+
+.abstract {
+  &-container {
+    padding: 3rem 2rem;
+    background: linear-gradient(
+      rgba($white, 0.92),
+      rgba($white, 0.92)
+    ), url('../../../assets/ricemill-bg.jpg') center/cover no-repeat fixed;
+    min-height: 100vh;
+  }
+
+  &-header {
+    text-align: center;
+    margin-bottom: 4rem;
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: $primary-color;
+      position: relative;
+      display: inline-block;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: $accent-color;
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after {
+        width: 70%;
+      }
+    }
+  }
+
+  &-content {
+    @include card-style;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: $text-color;
+      margin-bottom: 1.5rem;
+      text-align: justify;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.abstract-wrapper {
+  min-height: 100vh;
+  position: relative;
+  padding: 2rem;
+  overflow: hidden;
+
+  .abstract-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    
+    .background-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.08;
+      }
+    }
+
+    .content-container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 3rem;
+      margin-top: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2.8rem;
+        margin-bottom: 3rem;
+        position: relative;
+        font-weight: 700;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -15px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100px;
+          height: 4px;
+          background: linear-gradient(90deg, #3498db, #2980b9);
+          border-radius: 2px;
+        }
+      }
+
+      .text-content {
+        color: #2c3e50;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        text-align: justify;
+        
+        p {
+          margin-bottom: 1.5rem;
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.highlight-box {
+  background: $background-light;
+  border-left: 4px solid $accent-color;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateX(5px);
+  }
+
+  h3 {
+    color: $accent-color;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+
+  .stat-card {
+    @include card-style;
+    text-align: center;
+    transition: transform 0.3s ease;
+    padding: 1.5rem;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    h4 {
+      color: $primary-color;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .percentage {
+      font-size: 2.5rem;
+      color: $accent-color;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &::after {
+        content: '%';
+        font-size: 1.5rem;
+        margin-left: 2px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .abstract-container {
+    padding: 2rem 1rem;
+  }
+
+  .abstract-content {
+    padding: 1.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .abstract-wrapper {
+    padding: 1rem;
+
+    .abstract-content {
+      .content-container {
+        padding: 2rem 1.5rem;
+        margin-top: 1rem;
+
+        h1 {
+          font-size: 2.2rem;
+          margin-bottom: 2rem;
+        }
+
+        .text-content {
+          font-size: 1rem;
+          line-height: 1.6;
+        }
+      }
+    }
+  }
+}
